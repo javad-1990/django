@@ -1,0 +1,58 @@
+ {% extends 'pages/base.html' %}
+{% load static %}
+{% block main %}
+        <!-- Page Header-->
+    <header class="masthead" style="background-image: url('{% static "pages/assets/img/home-bg.jpg" %}')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>پایتون لرنینگ</h1>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+              {% for article in object_list %}
+              <div class="post-preview">
+                <a href="{% url 'pages:detail' article.slug %}">
+                    <h2 class="post-title">
+                        {{article.title}}
+
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{article.description|truncatewords:30}}
+                    </h3>
+                </a>
+                <p class="post-meta">
+                    نوشته شده توسط
+                    <a href="#!">برنامه نویس</a>
+                    {{article.jpublish}}
+                </p>
+                <div>
+                    {% for cat in article.category_published.all %}
+                    <a href="{% url 'pages:category' cat.slug %}">#{{cat.title}}</a>
+                    {% endfor %}
+                </div.            </div>
+            <hr>
+              {% endfor %}
+                <!-- Pager-->
+                {% if is_paginated %}
+                   <div class="d-flex justify-content-end mb-4 pager-buttom">
+                       {% if page_obj.has_previous %}
+                       <a class="btn btn-primary text-uppercase ml-3" href="{% url 'pages:home' page_obj.previous_page_number %}">پست های  جدید  &rarr;</a>
+                       {% endif %}
+                       {% if page_obj.has_next %}
+                       <a class="btn btn-primary text-uppercase " href="{% url 'pages:home' page_obj.next_page_number %}"> پست های قدیمی  &larr;</a>
+                       {% endif %} 
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
