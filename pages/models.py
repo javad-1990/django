@@ -62,11 +62,7 @@ class Article(models.Model):
     def jpublish(self):
         return jalali_convertor(self.publish)
     jpublish.short_description = "زمان انتشار"
-
-    def category_published(self):
-        return self.category.filter(status=True)
-
-
+    
     def thumbnail_tag(self):
         return format_html("<img width=100 height=75 style='border-radius: 50px;' src='{}'>".format(self.thumbnail.url))
     thumbnail_tag.short_description = "عکس" 
