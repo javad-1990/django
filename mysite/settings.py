@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'account.apps.AccountConfig',
     'extentions',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
