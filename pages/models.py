@@ -70,6 +70,8 @@ class Article(models.Model):
     thumbnail_tag.short_description = "عکس" 
 
 
-
+    def category_to_str(self):
+        return ",".join([category.title for category in self.category.active()])
+    category_to_str.short_description = "دسته بندی"
 
     objects = ArticleManager()
